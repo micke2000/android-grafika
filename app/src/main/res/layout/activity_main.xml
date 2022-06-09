@@ -6,15 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.example.grafika.PowierzchniaRysunku
-        android:id="@+id/powierzchnia_rysunku"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttony"
-        />
+    <com.example.grafika.DrawView
+    android:id="@+id/powierzchniaRysunku"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf=
+    "parent"
+    app:layout_constraintEnd_toEndOf=
+    "parent"
+    app:layout_constraintStart_toStartOf=
+    "parent"
+    app:layout_constraintTop_toTopOf=
+    "parent" />
 
     <LinearLayout
         android:id="@+id/buttony"
@@ -55,6 +58,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/purple_200"
             android:text="X" />
+
     </LinearLayout>
 
 
