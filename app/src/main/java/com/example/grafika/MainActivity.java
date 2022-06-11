@@ -1,11 +1,14 @@
 package com.example.grafika;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -17,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -40,11 +44,11 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private static final int READ_CODE = 342;
-    private Button mRedBtn;
     private Button mGreenBtn;
     private Button mBlueBtn;
     private Button mBlackBtn;
     private Button mEreaseBtn;
+    private Button mUndoBtn;
     private DrawView powierzchniaRysunku;
 
     @Override
@@ -61,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 saveImage();
                 break;
             case R.id.action_browse:
-                System.out.println("browse");
+                Intent intent = new Intent(this,BrowseActivity.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -71,11 +76,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mRedBtn = findViewById(R.id.red_btn);
         mGreenBtn = findViewById(R.id.green_btn);
         mBlueBtn = findViewById(R.id.blue_btn);
         mBlackBtn = findViewById(R.id.black_btn);
         mEreaseBtn = findViewById(R.id.erease_btn);
+        mUndoBtn = findViewById(R.id.undo_btn);
         powierzchniaRysunku = (DrawView) findViewById(R.id.powierzchniaRysunku);
         powierzchniaRysunku.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -85,6 +90,21 @@ public class MainActivity extends AppCompatActivity {
                 int width = powierzchniaRysunku.getWidth(); //height is ready
                 powierzchniaRysunku.init(height,width);
             }
+        });
+        mBlackBtn.setOnClickListener(view -> {
+            powierzchniaRysunku.setColor(Color.BLACK);
+        });
+        mBlueBtn.setOnClickListener(view -> {
+            powierzchniaRysunku.setColor(Color.BLUE);
+        });
+        mGreenBtn.setOnClickListener(view -> {
+            powierzchniaRysunku.setColor(Color.GREEN);
+        });
+        mEreaseBtn.setOnClickListener(view -> {
+            powierzchniaRysunku.clearCanvas();
+        });
+        mUndoBtn.setOnClickListener(view -> {
+            powierzchniaRysunku.undo();
         });
     }
 
@@ -148,5 +168,14 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
 
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+    }
 }

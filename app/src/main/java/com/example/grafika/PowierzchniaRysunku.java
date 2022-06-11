@@ -21,7 +21,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
+//UWAGA TO NIE DZIALA TO SA WATKI
+// POLEGŁEM GDY TO PISAŁEM, DZIAŁA ALE PASKUDNIE
 public class PowierzchniaRysunku extends SurfaceView
         implements SurfaceHolder.Callback {
     private final Paint mBitmapPaint;

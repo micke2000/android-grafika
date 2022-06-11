@@ -1,5 +1,6 @@
 package com.example.grafika;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -10,7 +11,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.core.util.Pair;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class DrawView extends View {
 
@@ -23,9 +27,18 @@ public class DrawView extends View {
     // how to draw the geometries,text and bitmaps
     private Paint mPaint;
 
+    public ArrayList<Stroke> getPaths() {
+        return paths;
+    }
+
+    public void setPaths(ArrayList<Stroke> paths) {
+        this.paths = paths;
+    }
+
     // ArrayList to store all the strokes
     // drawn by the user on the Canvas
     private ArrayList<Stroke> paths = new ArrayList<>();
+    private List<Pair<Float,Float>> beginEndCoordinates = new ArrayList<>();
     private int currentColor;
     private int strokeWidth;
     private Bitmap mBitmap;
@@ -72,6 +85,10 @@ public class DrawView extends View {
         currentColor = color;
     }
 
+    public void clearCanvas(){
+        paths = new ArrayList<>();
+        invalidate();
+    }
     // sets the stroke width
     public void setStrokeWidth(int width) {
         strokeWidth = width;
@@ -93,6 +110,7 @@ public class DrawView extends View {
 
     // this is the main method where
     // the actual drawing takes place
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         // save the current state of the canvas before,
@@ -105,10 +123,17 @@ public class DrawView extends View {
 
         // now, we iterate over the list of paths
         // and draw each path on the canvas
+        int index = 0;
+
         for (Stroke fp : paths) {
             mPaint.setColor(fp.color);
             mPaint.setStrokeWidth(fp.strokeWidth);
             mCanvas.drawPath(fp.path, mPaint);
+            mCanvas.drawCircle(fp.beginCoor.first,fp.beginCoor.second,15,mPaint);
+            if(fp.endCoor != null){
+                mCanvas.drawCircle(fp.endCoor.first,fp.endCoor.second,15,mPaint);
+            }
+
         }
         canvas.drawBitmap(mBitmap, 0, 0, mBitmapPaint);
         canvas.restore();
@@ -120,8 +145,11 @@ public class DrawView extends View {
     // firstly, we create a new Stroke
     // and add it to the paths list
     private void touchStart(float x, float y) {
+        if(paths.size() >=1){
+
+        }
         mPath = new Path();
-        Stroke fp = new Stroke(currentColor, strokeWidth, mPath);
+        Stroke fp = new Stroke(currentColor, strokeWidth, mPath,new android.util.Pair<>(x,y));
         paths.add(fp);
 
         // finally remove any curve
@@ -136,6 +164,7 @@ public class DrawView extends View {
         // coordinates of the finger
         mX = x;
         mY = y;
+
     }
 
     // in this method we check
@@ -155,6 +184,9 @@ public class DrawView extends View {
             mX = x;
             mY = y;
         }
+
+        Stroke last = paths.get(paths.size()-1);
+        paths.set(paths.size()-1,new Stroke(last.color,last.strokeWidth,last.path,last.beginCoor,new android.util.Pair<>(mX,mY)));
     }
 
     // at the end, we call the lineTo method
@@ -189,4 +221,6 @@ public class DrawView extends View {
         }
         return true;
     }
+
+
 }

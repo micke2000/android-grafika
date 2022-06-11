@@ -3,8 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/activity_browse.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/activity_browse_landscape.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/activity_image_preview.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/fragment_details.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/fragment_list.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/fragment_overview.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/image_view.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/main_activity.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/main_fragment.xml" value="0.22509057971014493" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/menu.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/wiersz_oceny.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/grafika/app/src/main/res/layout/zdjecie_view.xml" value="0.22509057971014493" />
       </map>
     </option>
   </component>
